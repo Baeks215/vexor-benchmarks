@@ -1,0 +1,17 @@
+cabal-version:      3.14
+name:               haskell-demo
+version:            0.1.0.0
+executable basic
+    main-is:          basic.hs
+    build-depends:    base ^>=4.18.3.0,
+                      diagrams-lib,
+                      diagrams-svg
+    default-language: Haskell2010
+
+executable snake
+    main-is:          snake.hs
+    build-depends:    base ^>=4.18.3.0,
+                      diagrams-lib,
+                      diagrams-svg,
+                      colour
+    default-language: Haskell2010
