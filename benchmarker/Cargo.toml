@@ -1,0 +1,21 @@
+[package]
+name = "benchmarker"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "vx-time"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+notify = "8.2.0"
+
+# Optimized release profile: aggressive inlining + LTO, single codegen unit
+# for minimal jitter, abort-on-panic to drop unwinding overhead, symbols stripped.
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
