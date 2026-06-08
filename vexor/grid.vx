@@ -1,4 +1,4 @@
-val N = 25
+val N = 50
 
 -- Grid size; bump to scale complexity (N*N circles).
 set canvas(1000, 1000)
@@ -30,3 +30,4 @@ fn cell(i) =
 val cells = [1..TOTAL] >> map(cell)
 
 export Group(cells)
+

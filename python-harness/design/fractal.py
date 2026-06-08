@@ -1,4 +1,4 @@
-D = 7
+D = 8
 # recursion depth; bump to scale complexity (~3^D triangles)
 
 import drawsvg as draw

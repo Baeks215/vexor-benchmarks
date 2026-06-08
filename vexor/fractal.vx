@@ -1,4 +1,4 @@
-val D = 7
+val D = 8
 
 -- Triangle corners on the center-origin 1000x1000 canvas (-500..500).
 val top   = (0, -440)

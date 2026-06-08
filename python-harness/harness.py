@@ -6,7 +6,7 @@ import traceback
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
-DEBOUNCE_SECONDS = 0.3
+DEBOUNCE_SECONDS = 0
 
 GLOBAL_CONTEXT = {"__name__": "__main__"}
 
