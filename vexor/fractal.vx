@@ -1,0 +1,50 @@
+val D = 7
+
+-- Triangle corners on the center-origin 1000x1000 canvas (-500..500).
+val top   = (0, -440)
+val left  = (-440, 440)
+val right = (440, 440)
+
+fn mid(a, b) = ((fst(a) + fst(b)) / 2, (snd(a) + snd(b)) / 2)
+
+-- One filled triangle, coloured by a coordinate-based gradient over its centroid.
+fn triangle(p1, p2, p3) =
+  Path([
+    jumpTo(fst(p1), snd(p1)),
+    lineTo(fst(p2), snd(p2)),
+    lineTo(fst(p3), snd(p3)),
+    close
+  ]) >>
+    fill(rgb(r, g, b)) >>
+    strokeColor(rgb(17, 17, 17)) >>
+    strokeWidth(0.3)
+  where {
+    cx = (fst(p1) + fst(p2) + fst(p3)) / 3
+    cy = (snd(p1) + snd(p2) + snd(p3)) / 3
+    -- normalize centroid from center-origin (-500..500) to 0..1 for the gradient
+    nx = (cx + 500) / 1000
+    ny = (cy + 500) / 1000
+    r = floor(clamp(nx * 255, 0, 255))
+    g = floor(clamp(ny * 255, 0, 255))
+    b = floor(clamp(255 - nx * 255, 0, 255))
+  }
+
+-- Split a triangle into 3 corner sub-triangles (dropping the middle) until
+-- depth 0, where a single filled triangle is emitted. Lazy `where` bindings
+-- mean the recursive calls are only forced on the `else` branch.
+fn subdivide(p1, p2, p3, depth) =
+  if depth == 0 {
+    [triangle(p1, p2, p3)]
+  } else {
+    concat(sub1, concat(sub2, sub3))
+  }
+  where {
+    m12 = mid(p1, p2)
+    m23 = mid(p2, p3)
+    m31 = mid(p3, p1)
+    sub1 = subdivide(p1, m12, m31, depth - 1)
+    sub2 = subdivide(m12, p2, m23, depth - 1)
+    sub3 = subdivide(m31, m23, p3, depth - 1)
+  }
+
+export Group(subdivide(top, left, right, D))

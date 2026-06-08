@@ -1,4 +1,4 @@
 /python-harness/__pycache__
-/python-harness/design/*.svg
+*.svg
 /haskell-demo/dist-newstyle
 /benchmarker/target
