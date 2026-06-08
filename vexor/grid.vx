@@ -1,0 +1,32 @@
+val N = 25
+
+-- Grid size; bump to scale complexity (N*N circles).
+set canvas(1000, 1000)
+
+val TOTAL = N * N
+val spacing = 1000 / (N + 1)
+
+-- One grid cell from a flat index i in [1..N*N]. The row/col are recovered
+-- arithmetically, so a single map replaces the nested loop. Coordinates are
+-- computed in 0..1000 space, then shifted by -500 onto the center origin.
+fn cell(i) =
+  Circle(radius) >>
+    fill(rgb(red, green, blue)) >>
+    strokeColor(rgb(17, 17, 17)) >>
+    strokeWidth(0.2) >>
+    move(x - 500, y - 500)
+  where {
+    r = (i - 1) // N + 1
+    c = (i - 1) % N + 1
+    x = c * spacing
+    y = r * spacing + sin(c * 0.5) * 10
+    radius = max(1, (cos(r * 0.3) + 1.5) * 3)
+    red   = floor(clamp(x / 1000 * 255, 0, 255))
+    green = floor(clamp(y / 1000 * 255, 0, 255))
+    blue  = floor(clamp(r * c / TOTAL * 255, 0, 255))
+  }
+
+-- Single flat pass over every cell index.
+val cells = [1..TOTAL] >> map(cell)
+
+export Group(cells)
