@@ -36,7 +36,7 @@ def load_long(path, engine):
         id_vars=METRIC,
         value_vars=run_cols,
         var_name="Run",
-        value_name="Latency (ms)",
+        value_name="Execution Time (ms)",
     )
     # Workload scale: total visual geometry elements = 3 ** D.
     long["Total Elements"] = 3 ** long[METRIC]
@@ -73,7 +73,7 @@ def plot(df):
     sns.lineplot(
         data=df,
         x="Total Elements",
-        y="Latency (ms)",
+        y="Execution Time (ms)",
         hue="Engine",
         palette=PALETTE,
         marker="o",
@@ -88,8 +88,8 @@ def plot(df):
     force_scalar_ticks(ax, sorted(df["Total Elements"].unique()))
 
     ax.set_xlabel("Total Visual Geometry Elements (3ᴰ)")
-    ax.set_ylabel("Round-Trip Latency (ms)")
-    ax.set_title("Fractal Workload: Rebuild Latency vs Geometry Count")
+    ax.set_ylabel("Execution Time (ms)")
+    ax.set_title("Fractal Workload: Rebuild Execution Time vs Geometry Count")
     ax.legend(title="Engine")
 
     fig.savefig(OUTPUT_SVG, format="svg", bbox_inches="tight")

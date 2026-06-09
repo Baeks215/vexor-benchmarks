@@ -2,7 +2,7 @@
 
 Reads two wide-format CSVs (no header): column 1 is the recursion depth D, columns
 2..31 are 30 independent latency runs (ms). The workload scale is 3**D (total elements).
-Latency is shown in microseconds so the log-decade ticks land on clean values.
+Execution Time is shown in microseconds so the log-decade ticks land on clean values.
 """
 
 import os
@@ -27,7 +27,7 @@ OUTPUT_SVG = os.path.join(PLOTS, "fractal_benchmark_loglog.svg")
 METRIC = "D"
 RUNS = 30
 PALETTE = {"Vexor": "#4C72B0", "Python": "#C44E52"}
-LATENCY = "Latency (µs)"
+LATENCY = "Execution Time (µs)"
 
 
 def load_long(path, engine):
@@ -95,8 +95,8 @@ def plot(df):
     ax.yaxis.set_minor_formatter(NullFormatter())
 
     ax.set_xlabel("Total Visual Geometry Elements (3ᴰ)")
-    ax.set_ylabel("Round-Trip Latency (µs)")
-    ax.set_title("Fractal Workload: Rebuild Latency vs Geometry Count (log-log)")
+    ax.set_ylabel("Execution Time (µs)")
+    ax.set_title("Fractal Workload: Rebuild Execution Time vs Geometry Count (log-log)")
     ax.legend(title="Engine")
 
     fig.savefig(OUTPUT_SVG, format="svg", bbox_inches="tight")

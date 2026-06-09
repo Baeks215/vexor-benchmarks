@@ -2,7 +2,7 @@
 
 Reads two wide-format CSVs (no header): column 1 is the grid size N, columns 2..31
 are 30 independent latency runs (ms). The workload scale is N*N (total elements).
-Latency is shown in microseconds so the log-decade ticks land on clean values.
+Execution Time is shown in microseconds so the log-decade ticks land on clean values.
 """
 
 import os
@@ -27,7 +27,7 @@ OUTPUT_SVG = os.path.join(PLOTS, "grid_benchmark_loglog.svg")
 METRIC = "N"
 RUNS = 30
 PALETTE = {"Vexor": "#4C72B0", "Python": "#C44E52"}
-LATENCY = "Latency (µs)"
+LATENCY = "Execution Time (µs)"
 
 
 def load_long(path, engine):
@@ -95,8 +95,8 @@ def plot(df):
     ax.yaxis.set_minor_formatter(NullFormatter())
 
     ax.set_xlabel("Total Visual Geometry Elements (N²)")
-    ax.set_ylabel("Round-Trip Latency (µs)")
-    ax.set_title("Grid Workload: Rebuild Latency vs Geometry Count (log-log)")
+    ax.set_ylabel("Execution Time (µs)")
+    ax.set_title("Grid Workload: Rebuild Execution Time vs Geometry Count (log-log)")
     ax.legend(title="Engine")
 
     fig.savefig(OUTPUT_SVG, format="svg", bbox_inches="tight")
