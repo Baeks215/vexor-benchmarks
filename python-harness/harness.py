@@ -11,10 +11,11 @@ DEBOUNCE_SECONDS = 0
 GLOBAL_CONTEXT = {"__name__": "__main__"}
 
 
-def run_once(design_path):
+def execute(design_path):
     with open(design_path) as f:
         src = f.read()
     try:
+        # Dynamically execute code from design_path
         exec(src, GLOBAL_CONTEXT)
     except Exception:
         traceback.print_exc()
@@ -35,11 +36,13 @@ class ReloadHandler(FileSystemEventHandler):
         if now - self.last_run < DEBOUNCE_SECONDS:
             return
         self.last_run = now
-        run_once(self.target)
+        execute(self.target)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Watch a design script and re-run it on change.")
+    parser = argparse.ArgumentParser(
+        description="Watch a design script and re-run it on change."
+    )
     parser.add_argument("input", help="path to the design script to watch and run")
     args = parser.parse_args()
 
@@ -48,7 +51,7 @@ def main():
 
     os.chdir(os.path.dirname(input_path))
     print(f"[harness] watching {input_path}")
-    run_once(input_path)
+    execute(input_path)
 
     handler = ReloadHandler(input_path)
     observer = Observer()
