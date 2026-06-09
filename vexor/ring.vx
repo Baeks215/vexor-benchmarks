@@ -1,0 +1,14 @@
+val N = 6
+val ringRadius = 50
+val spreadRadius = 80
+
+fn makeDot(i) =
+   Circle(ringRadius) >> strokeWidth(2) >> move(x, y)
+  where {
+    angle = 2 * PI * i / N
+    x = spreadRadius * cos(angle)
+    y = spreadRadius * sin(angle)
+  }
+
+val rings = Group([0..N - 1] >> map(makeDot))
+export rings
