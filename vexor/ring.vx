@@ -1,6 +1,8 @@
+set canvas(300, 300)
+
 val N = 6
 val ringRadius = 50
-val spreadRadius = 80
+val spreadRadius = 100
 
 fn makeDot(i) =
    Circle(ringRadius) >> strokeWidth(2) >> move(x, y)

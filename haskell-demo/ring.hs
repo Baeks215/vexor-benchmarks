@@ -6,7 +6,7 @@ n = 6
 ringRadius :: Double
 ringRadius = 50
 spreadRadius :: Double
-spreadRadius = 80
+spreadRadius = 100
 
 makeDot :: Int -> Diagram B
 makeDot i =
