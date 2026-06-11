@@ -6,8 +6,6 @@ import traceback
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
-DEBOUNCE_SECONDS = 0
-
 GLOBAL_CONTEXT = {"__name__": "__main__"}
 
 
@@ -19,40 +17,38 @@ def execute(design_path):
         exec(src, GLOBAL_CONTEXT)
     except Exception:
         traceback.print_exc()
-    print(f"Completed: {os.path.basename(design_path)}")
+
+    print(f"Executed: {os.path.basename(design_path)}")
 
 
 class ReloadHandler(FileSystemEventHandler):
     def __init__(self, target):
         self.target = os.path.abspath(target)
-        self.last_run = 0.0
 
     def on_modified(self, event):
         if event.is_directory:
             return
         if os.path.abspath(event.src_path) != self.target:
             return
-        now = time.perf_counter()
-        if now - self.last_run < DEBOUNCE_SECONDS:
-            return
-        self.last_run = now
+        # re-execute
         execute(self.target)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Watch a design script and re-run it on change."
+        description="Watch a design script and re-run it when it changes."
     )
-    parser.add_argument("input", help="path to the design script to watch and run")
+    parser.add_argument("input", help="path to the design script")
     args = parser.parse_args()
 
     input_path = os.path.abspath(args.input)
-    GLOBAL_CONTEXT["__file__"] = input_path
 
-    os.chdir(os.path.dirname(input_path))
-    print(f"[harness] watching {input_path}")
+    # Initial execution
     execute(input_path)
 
+    print(f"[harness] watching {input_path}")
+
+    # Watch
     handler = ReloadHandler(input_path)
     observer = Observer()
     observer.schedule(handler, os.path.dirname(input_path), recursive=False)

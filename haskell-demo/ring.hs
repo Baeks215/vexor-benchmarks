@@ -10,7 +10,9 @@ spreadRadius = 100
 
 makeDot :: Int -> Diagram B
 makeDot i =
-  circle ringRadius # lw 2 # translate (r2 (x, y))
+  circle ringRadius
+    # lw 2
+    # translate (r2 (x, y))
  where
   angle = 2 * pi * fromIntegral i / fromIntegral n
   x = spreadRadius * cos angle
