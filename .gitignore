@@ -1,6 +1,5 @@
-/python-harness/__pycache__
+**/__pycache__
 *.svg
 !**/plots/*.svg
-/haskell-demo/dist-newstyle
-/benchmarker/target
-/benchmarks/__pycache__
+/haskell/dist-newstyle
+/svg-timer/target

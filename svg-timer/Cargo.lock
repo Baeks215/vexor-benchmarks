@@ -53,7 +53,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "benchmarker"
+name = "svg-timer"
 version = "0.1.0"
 dependencies = [
  "clap",
