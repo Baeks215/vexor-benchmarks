@@ -16,7 +16,7 @@ ROOT = os.path.dirname(HERE)  # benchmarks
 DATA = os.path.join(ROOT, "data")
 PLOTS = os.path.join(ROOT, "plots")
 
-SOURCE = os.path.join(DATA, "ph-fractal.csv")
+SOURCE = os.path.join(DATA, "python-fractal.csv")
 OUTPUT_SVG = os.path.join(PLOTS, "python_fractal_benchmark.svg")
 
 METRIC = "D"

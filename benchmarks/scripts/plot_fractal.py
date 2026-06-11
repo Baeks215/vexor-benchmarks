@@ -19,7 +19,7 @@ PLOTS = os.path.join(ROOT, "plots")
 # Engine -> source CSV (wide format, no header: D + 30 run columns).
 SOURCES = {
     "Vexor": os.path.join(DATA, "vexor-fractal.csv"),
-    "Python": os.path.join(DATA, "ph-fractal.csv"),
+    "Python": os.path.join(DATA, "python-fractal.csv"),
 }
 OUTPUT_SVG = os.path.join(PLOTS, "fractal_benchmark.svg")
 

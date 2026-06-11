@@ -19,7 +19,7 @@ PLOTS = os.path.join(ROOT, "plots")
 # Engine -> source CSV (wide format, no header: N + 30 run columns).
 SOURCES = {
     "Vexor": os.path.join(DATA, "vexor-grid.csv"),
-    "Python": os.path.join(DATA, "ph-grid.csv"),
+    "Python": os.path.join(DATA, "python-grid.csv"),
 }
 OUTPUT_SVG = os.path.join(PLOTS, "grid_benchmark.svg")
 

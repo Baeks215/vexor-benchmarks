@@ -16,7 +16,7 @@ ROOT = os.path.dirname(HERE)  # benchmarks
 DATA = os.path.join(ROOT, "data")
 PLOTS = os.path.join(ROOT, "plots")
 
-SOURCE = os.path.join(DATA, "ph-grid.csv")
+SOURCE = os.path.join(DATA, "python-grid.csv")
 OUTPUT_SVG = os.path.join(PLOTS, "python_grid_benchmark.svg")
 
 METRIC = "N"
