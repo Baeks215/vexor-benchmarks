@@ -1,4 +1,4 @@
-//! `vx-time` -- out-of-process round-trip latency benchmarker for file-watching
+//! `svg-timer` -- out-of-process round-trip latency benchmarker for file-watching
 //! toolchains.
 //!
 //! The `single` subcommand issues one clean filesystem write to a watched input
@@ -24,7 +24,7 @@ type WatchEvent = notify::Result<notify::Event>;
 
 #[derive(Parser)]
 #[command(
-    name = "vx-time",
+    name = "svg-timer",
     about = "Round-trip latency benchmarker for file-watching toolchains",
     version
 )]

@@ -3,7 +3,7 @@
 TOOLCHAINS lists each toolchain (python harness, vexor) and its designs. For each
 design this auto-starts the toolchain's watcher subprocess (writing to a temp svg),
 then for each case rewrites the first line of INPUT to set the complexity variable,
-runs `vx-time multi N INPUT OUTPUT`, and records the N round-trip latencies (comma-
+runs `svg-timer multi N INPUT OUTPUT`, and records the N round-trip latencies (comma-
 separated ms). Rows go to data/{tool}-{name}.csv. The watcher is torn down after.
 
 No manual setup required -- watchers are launched and killed here. Pass toolchain
@@ -24,11 +24,11 @@ ROOT = os.path.dirname(HERE)  # benchmarks
 REPO = os.path.dirname(ROOT)  # repo root
 
 N = 30
-VX_TIME = os.path.join(REPO, "svg-timer", "target", "release", "vx-time")
+SVG_TIMER = os.path.join(REPO, "svg-timer", "target", "release", "svg-timer")
 
 SETTLE = 0.5  # seconds to let the warmup rebuild from a line edit settle
 WARMUP = 10  # seconds to wait for the watcher's first output before measuring
-TIMEOUT = 600  # per-case ceiling for vx-time multi
+TIMEOUT = 600  # per-case ceiling for svg-timer multi
 
 # --- python harness toolchain ---------------------------------------------
 PY_DESIGN = os.path.join(REPO, "python", "design")
@@ -106,7 +106,7 @@ def set_case(toolchain, test, case):
 
 def run_case(test, output):
     proc = subprocess.run(
-        [VX_TIME, "multi", str(N), test["input"], output],
+        [SVG_TIMER, "multi", str(N), test["input"], output],
         capture_output=True,
         text=True,
         check=True,
@@ -148,7 +148,7 @@ def run_test(toolchain, test):
                     sys.exit(f"timeout on {test['name']} {test['var_name']}={case}")
                 except subprocess.CalledProcessError as e:
                     sys.exit(
-                        f"vx-time failed on {test['name']} "
+                        f"svg-timer failed on {test['name']} "
                         f"{test['var_name']}={case}: {e.stderr.strip()}"
                     )
                 print(
