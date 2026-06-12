@@ -1,5 +1,6 @@
 **/__pycache__
 *.svg
 !**/plots/*.svg
+!**/ring-diff/*.svg
 /haskell/dist-newstyle
 /svg-timer/target
