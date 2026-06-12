@@ -1,8 +1,8 @@
 cabal-version:      3.14
 name:               haskell
 version:            0.1.0.0
-executable basic
-    main-is:          basic.hs
+executable circle
+    main-is:          circle.hs
     hs-source-dirs:   design
     build-depends:    base ^>=4.18.3.0,
                       diagrams-lib,

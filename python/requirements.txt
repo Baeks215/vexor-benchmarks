@@ -1,2 +1,2 @@
-drawsvg
-watchdog
+drawsvg==2.4.1
+watchdog==6.0.0

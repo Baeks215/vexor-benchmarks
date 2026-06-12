@@ -1,0 +1,4 @@
+set canvas(300, 300)
+
+val myCircle = Circle(100)
+export myCircle
